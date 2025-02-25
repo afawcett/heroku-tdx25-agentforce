@@ -1,15 +1,15 @@
 package com.heroku.java.services;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Tag(name = "Finance Agreement Calculation", description = "Calculates finance agreements for car purchases based on valuation, credit status, and business margins.")
@@ -17,13 +17,21 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequestMapping("/api/")
 public class FinanceAgreementService {
 
-    private static final Logger logger = LoggerFactory.getLogger(FinanceAgreementService.class);
-
-    @Operation(summary = "Calculate a Finance Agreement", description = "Processes a finance agreement based on car valuation, customer credit profile, business margin constraints, and competitor pricing.")
+    @Operation(
+        summary = "Calculate a Finance Agreement",
+        description = "Processes a finance agreement based on car valuation, customer credit profile, business margin constraints, and competitor pricing.",
+        responses = { @ApiResponse(responseCode = "200", description = "Response containing the calculated finance agreement. Describe the results in natural language text to the user.")})
     @PostMapping("/calculateFinanceAgreement")
     public FinanceCalculationResponse calculateFinanceAgreement(
-            @RequestBody FinanceCalculationRequest request, HttpServletRequest httpServletRequest) {
-        logger.info("Processing finance calculation for Customer ID: {} and Vehicle ID: {}", request.customerId, request.vehicleId);
+            @RequestBody(
+                description = "Request to compute a finance agreement for a car purchase, including the Salesforce record ID of both the customer applying for financing and the vehicle being financed.", 
+                content = @Content(schema = @Schema(implementation = FinanceCalculationRequest.class)))
+            FinanceCalculationRequest request,
+            HttpServletRequest httpServletRequest) {
+            
+        // Query Vehicle information from Salesforce
+        // ...
+
         // Mocked Response Data
         FinanceCalculationResponse response = new FinanceCalculationResponse();
         response.recommendedFinanceOffer = new FinanceOffer();

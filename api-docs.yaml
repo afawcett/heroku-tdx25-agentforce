@@ -44,14 +44,17 @@ paths:
         \ credit profile, business margin constraints, and competitor pricing."
       operationId: calculateFinanceAgreement
       requestBody:
+        description: "Request to compute a finance agreement for a car purchase, including\
+          \ the Salesforce record ID of both the customer applying for financing and\
+          \ the vehicle being financed."
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/FinanceCalculationRequest"
-        required: true
       responses:
         "200":
-          description: OK
+          description: Response containing the calculated finance agreement. Describe
+            the results in natural language text to the user.
           content:
             '*/*':
               schema:
