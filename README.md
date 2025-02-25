@@ -49,7 +49,7 @@ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-heroku-integrat
 heroku salesforce:connect my-org --store-as-run-as-user
 heroku salesforce:import api-docs.yaml --org-name my-org --client-name ActionsService
 ```
-sf
+
 Trigger an application rebuild to install the Heroku Integration buildpack
 
 ```
@@ -82,6 +82,7 @@ echo \
 "ExternalService.ActionsService.calculateFinanceAgreement_Request request = new ExternalService.ActionsService.calculateFinanceAgreement_Request();" \
 "ExternalService.ActionsService_FinanceCalculationRequest body = new ExternalService.ActionsService_FinanceCalculationRequest();" \
 "request.body = body;" \
+"request.body.vehicleId = 'a04Hs00002EMj9PIAT';" \
 "System.debug('Final Car Price: ' + service.calculateFinanceAgreement(request).Code200.recommendedFinanceOffer.finalCarPrice);" \
 | sf apex run -o my-org
 ```
