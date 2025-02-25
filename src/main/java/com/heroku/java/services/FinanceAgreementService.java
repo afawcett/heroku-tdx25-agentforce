@@ -1,8 +1,14 @@
 package com.heroku.java.services;
 
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
+import com.sforce.soap.partner.PartnerConnection;
+import com.sforce.soap.partner.QueryResult;
+import com.sforce.ws.ConnectionException;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -27,10 +33,16 @@ public class FinanceAgreementService {
                 description = "Request to compute a finance agreement for a car purchase, including the Salesforce record ID of both the customer applying for financing and the vehicle being financed.", 
                 content = @Content(schema = @Schema(implementation = FinanceCalculationRequest.class)))
             FinanceCalculationRequest request,
-            HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) throws ConnectionException {
             
         // Query Vehicle information from Salesforce
-        // ...
+        PartnerConnection connection = (PartnerConnection) httpServletRequest.getAttribute("salesforcePartnerConnection");
+        String soql = String.format(
+            "SELECT Id, Color__c, Fuel_Type__c, Make__c, Mileage__c, Model__c, Price__c, Status__c, Year__c " +
+            "FROM Vehicle_Model__c " +
+            "WHERE Id = '%s' ", 
+            request.vehicleId);
+        QueryResult queryResult = connection.query(soql);    
 
         // Mocked Response Data
         FinanceCalculationResponse response = new FinanceCalculationResponse();
