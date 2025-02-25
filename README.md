@@ -22,7 +22,7 @@ mvn spring-boot:run
 In a new terminal window run the following command substituting the Id values for valid **Contact** and **Vehicle Id** records from your Salesforce org.
 
 ```
-./bin/invoke.sh my-org 'http://localhost:8080/api/calculateFinanceAgreement' '{"customerId": "0035g00000XyZbHAZ","vehicleId": "a0B5g00000LkVnWEAV","maxInterestRate": 0,"downPayment": 1000,"years": 3}'
+./bin/invoke.sh my-org 'http://localhost:8080/api/calculateFinanceAgreement' '{"customerId": "0035g00000XyZbHAZ","vehicleId": "a04Hs00002EMj9PIAT","maxInterestRate": 0,"downPayment": 1000,"years": 3}'
 ```
 
 You should see the following output:
