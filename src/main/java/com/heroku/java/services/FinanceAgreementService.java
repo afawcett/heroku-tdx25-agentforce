@@ -42,8 +42,8 @@ public class FinanceAgreementService {
             FinanceCalculationRequest request,
             HttpServletRequest httpServletRequest) {
             
+        // Obtain Salesforce connection for Heroku Integration add-on
         PartnerConnection connection = (PartnerConnection) httpServletRequest.getAttribute("salesforcePartnerConnection");
-
         if (connection == null) {
             throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, "Salesforce connection is not available.");
         }
@@ -71,9 +71,7 @@ public class FinanceAgreementService {
 
             // Monthly Payment Calculation (Basic Loan Formula)
             double monthlyInterestRate = (annualInterestRate / 100) / 12;
-            double monthlyPayment = (loanAmount * monthlyInterestRate) / 
-                                    (1 - Math.pow(1 + monthlyInterestRate, -loanTermMonths));
-            
+            double monthlyPayment = (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -loanTermMonths));            
             double totalFinancingCost = monthlyPayment * loanTermMonths;
 
             // Build response
