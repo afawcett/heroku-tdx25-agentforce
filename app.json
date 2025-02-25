@@ -1,0 +1,17 @@
+{
+    "name": "Heroku Agentforce Actions",
+    "description": "A set of actions for retail, travel and automative agents",
+    "repository": "https://github.com/heroku/node-js-getting-started",
+    "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/main/public/node.svg",
+    "keywords": ["node", "express", "heroku"],
+    "image": "heroku/nodejs",  
+    "addons": ["heroku-integration"],
+    "buildpacks": [
+        {
+          "url": "https://github.com/heroku/heroku-buildpack-heroku-integration-service-mesh"
+        },
+        {
+          "url": "heroku/java"
+        }
+    ]
+}
