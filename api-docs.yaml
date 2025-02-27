@@ -6,12 +6,12 @@ servers:
 - url: http://localhost:8080
   description: Generated server url
 tags:
+- name: Carbon Footprint Calculation
+  description: "Calculates the carbon footprint for a given flight based on real-time\
+    \ Salesforce data, including checked-in passengers."
 - name: Finance Agreement Calculation
   description: "Calculates finance agreements for car purchases based on valuation,\
     \ credit status, and business margins."
-- name: Carbon Footprint Calculation
-  description: Calculates the carbon footprint for a given flight based on external
-    data.
 - name: Shipping Calculation
   description: Calculates the shipping options for a product given external data.
 paths:
@@ -51,10 +51,28 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/FinanceCalculationRequest"
+        required: true
       responses:
         "200":
-          description: Response containing the calculated finance agreement. Describe
-            the results in natural language text to the user.
+          description: Response containing the calculated finance agreement.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/FinanceCalculationResponse"
+        "404":
+          description: Vehicle not found in Salesforce.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/FinanceCalculationResponse"
+        "503":
+          description: Salesforce connection error.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/FinanceCalculationResponse"
+        "500":
+          description: Unexpected server error.
           content:
             '*/*':
               schema:
@@ -64,8 +82,8 @@ paths:
       tags:
       - Carbon Footprint Calculation
       summary: Calculate Carbon Footprint
-      description: Calculates the carbon footprint for a given flight based on external
-        data.
+      description: Calculates the carbon footprint for a given flight using real DEFRA
+        2023 factors and live Salesforce passenger data.
       operationId: calculateCarbonFootprint
       requestBody:
         content:
@@ -171,16 +189,17 @@ components:
           example: a0B5g00000LkVnWEAV
         maxInterestRate:
           type: number
-          description: The maximum interest rate the user is prepared to go to
+          description: The maximum interest rate the user is prepared to go to (percentage).
           format: double
+          example: 3.5
         downPayment:
           type: number
-          description: The down payment the user is prepared to give
+          description: The down payment the user is prepared to give.
           format: double
           example: 1000
         years:
           type: integer
-          description: The number years to pay the finance the user is reuqesting
+          description: The number of years to pay the finance the user is requesting.
           format: int32
           example: 3
       description: "Request to compute a finance agreement for a car purchase, including\
@@ -191,8 +210,7 @@ components:
       properties:
         recommendedFinanceOffer:
           $ref: "#/components/schemas/FinanceOffer"
-      description: Response containing the calculated finance agreement. Describe
-        the results in natural language text to the user.
+      description: Response containing the calculated finance agreement.
     FinanceOffer:
       type: object
       properties:
@@ -218,10 +236,7 @@ components:
       properties:
         flightId:
           type: string
-          description: The Salesforce record ID of the flight.
-          example: 0035g00000XyZbHAZ
-      description: "Request to calculate the carbon footprint of a flight, including\
-        \ the Salesforce record ID of the flight being analyzed."
+      description: Request to calculate the carbon footprint of a flight.
     CarbonFootprintResponse:
       type: object
       properties:
@@ -238,7 +253,6 @@ components:
           additionalProperties:
             type: string
       description: Response containing the calculated carbon footprint for the flight.
-        Describe the results in natural language text to the user.
     EmissionsData:
       type: object
       properties:
@@ -251,9 +265,6 @@ components:
         co2PerKmKg:
           type: number
           format: double
-        fuelBurnedLiters:
-          type: number
-          format: double
       description: Carbon emissions data for the flight.
     FlightInfo:
       type: object
@@ -263,8 +274,6 @@ components:
         departureAirport:
           type: string
         arrivalAirport:
-          type: string
-        aircraftType:
           type: string
         distanceKm:
           type: integer
