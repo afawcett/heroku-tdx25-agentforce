@@ -32,6 +32,20 @@ Response from server:
 {"recommendedFinanceOffer":{"finalCarPrice":41800.0,"adjustedInterestRate":3.4,"monthlyPayment":690.5,"loanTermMonths":60,"totalFinancingCost":41430.0}}
 ```
 
+Run the following command substituting the Id values for valid **Flight** record from your Salesforce org.
+
+```
+./bin/invoke.sh my-org 'http://localhost:8080/api/calculateCarbonFootprint' '{"flightId": "a02Hs00001D2QtLIAV"}'
+```
+
+You should see the following output:
+
+```
+Response from server:
+{"flight":{"flightNumber":"Astro Airlines-a02Hs00001D2QtLIAV","departureAirport":"SFO","arrivalAirport":"LAX","distanceKm":543,"passengerCount":1},"emissions":{"totalCo2Kg":85.794,"co2PerPassengerKg":85.794,"co2PerKmKg":0.158},"methodology":{"calculationBasis":"DEFRA 2023 emission factors per passenger-km","fuelToCo2Ratio":3.16,"radiativeForcingMultiplier":1.9,"dataSource":"DEFRA & ICAO Aviation Emissions Guidelines"},"timestamp":"2025-02-27T11:21:44.391794Z","units":{"distance":"km","emissions":"kg CO2e"}}
+```
+
+
 ## Deploying and Testing from Apex and Flow
 
 To test from Apex, Flow and other tools within your Salesforce org you must deploy the code and import it into your org. The following commands create a Heroku application and configure the Heroku Integration add-on. This add-on and associated buildpack allows secure authenticated access from within your code and visibility of your code from Apex, Flow and Agentforce. After this configuration, code is not accessible from the public internet, only from within an authorized Salesforce org.
