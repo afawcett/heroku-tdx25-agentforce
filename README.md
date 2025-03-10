@@ -1,13 +1,16 @@
 # TDX25 - Supercharging Agentforce with Heroku
 
+[!IMPORTANT]
+This repository contains several enhanced versions of the Heroku services used during TDX'25 Mini Hacks, and also as demonstrated in a subsequent Salesforce Ben webinar. The code is shared primarily for browsing purposes. Since the TDX Mini Hack applications and objects have not yet been shared, deployment is not currently possible.
+
 # Requirements
 - Heroku login
-- Heroku Integration Pilot enabled
+- Heroku AppLink Pilot enabled
 - Heroku CLI installed
 - Heroku Integration Pilot CLI plugin is installed
 - Salesforce CLI installed
-- Login information for one or more Scratch, Development or Sandbox orgs containing the TDX'25 Mini Hack apps
-- Watch the [Introduction to the Heroku Integration Pilot for Developers](https://www.youtube.com/watch?v=T5kOGNuTCLE) video 
+- Salesforce Org containing TDX'25 Mini Hack apps
+- Watch the [Introduction to the Heroku AppLink Pilot for Developers](https://www.youtube.com/watch?v=T5kOGNuTCLE) video 
 
 ## Local Development and Testing
 
@@ -45,7 +48,7 @@ Response from server:
 {"flight":{"flightNumber":"Astro Airlines-a02Hs00001D2QtLIAV","departureAirport":"SFO","arrivalAirport":"LAX","distanceKm":543,"passengerCount":1},"emissions":{"totalCo2Kg":85.794,"co2PerPassengerKg":85.794,"co2PerKmKg":0.158},"methodology":{"calculationBasis":"DEFRA 2023 emission factors per passenger-km","fuelToCo2Ratio":3.16,"radiativeForcingMultiplier":1.9,"dataSource":"DEFRA & ICAO Aviation Emissions Guidelines"},"timestamp":"2025-02-27T11:21:44.391794Z","units":{"distance":"km","emissions":"kg CO2e"}}
 ```
 
-Run the following command substituting the Id values for valid **Flight** record from your Salesforce org.
+Run the following command to generate a social card.
 
 ```
 ./bin/invoke.sh my-org 'http://localhost:8080/api/social/renderCard' '{"line1": "Test 1", "line2": "Test 2"}'
@@ -58,7 +61,6 @@ Response from server:
 {"socialCard":"iVBORw0KGgoAAAANSUhEUgAAAOYAAACSCAYAAABR2bZsAAAjiElEQVR4Xu2dB5gURRbHvTu95Kmnnp/xFCSjSEZyEAFRQEBAsqDknCQHyQILRzxyXjIIy8ICSxaJSlKJShIUwXORjIC+6//brfm6a3pmuqe7l5nd+n3f+9Cd7prunvp3Vb169eo
 ......MeoNeW4V3qGEqQiI3B1GdvmhQ4eyMNXiaG9RwlTYBqkxw40gUlhDCVOhiECUMBWKCEQJU6GIQJQwFYoIRAlToYhAlDAVighECVOhiECUMBWKCEQJU6GIQJQwFYoIRAlToYhAlDAVighECVOhiECUMBWKCEQJU6GIQJQwFYoIRAlToYhAlDAVighECVOhiED+DwdSYalU9//OAAAAAElFTkSuQmCC"}
 ```
-
 
 ## Deploying and Testing from Apex and Flow
 
