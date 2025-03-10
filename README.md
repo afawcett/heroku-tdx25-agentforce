@@ -1,7 +1,7 @@
 # TDX25 - Supercharging Agentforce with Heroku
 
-[!IMPORTANT]
-This repository contains several enhanced versions of the Heroku services used during TDX'25 Mini Hacks, and also as demonstrated in a subsequent Salesforce Ben webinar. The code is shared primarily for browsing purposes. Since the TDX Mini Hack applications and objects have not yet been shared, deployment is not currently possible.
+> [!IMPORTANT]
+> This repository contains several enhanced versions of the Heroku services used during TDX'25 Mini Hacks, and also as demonstrated in a subsequent Salesforce Ben webinar. The code is shared primarily for browsing purposes. Since the TDX Mini Hack applications and objects have not yet been shared, deployment is not currently possible.
 
 # Requirements
 - Heroku login
