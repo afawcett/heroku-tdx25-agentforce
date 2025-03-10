@@ -1,4 +1,4 @@
-// Generate campaign social card using Heroku action imported via AppLink
+// Generate campaign social card using Heroku app imported via AppLink
 ExternalService.ActionsService service = new ExternalService.ActionsService();
 ExternalService.ActionsService.renderCard_Request request = new ExternalService.ActionsService.renderCard_Request();
 request.body = new ExternalService.ActionsService_RenderCardRequest();
