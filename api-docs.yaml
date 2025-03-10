@@ -15,7 +15,27 @@ tags:
 - name: Shipping Calculation
   description: Calculates the shipping options for a product given external data.
 paths:
-  /api/calculateShippingOptions:
+  /api/social/renderCard:
+    post:
+      tags:
+      - Services for Managing Social Cards for Marketing Campaigns
+      summary: Renders a custom social card for marketing campaigns.
+      operationId: renderCard
+      requestBody:
+        description: Use the line1 and line2 properites to customize
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenderCardRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/RenderCardResponse"
+  /api/shipping/calculateShippingOptions:
     post:
       tags:
       - Shipping Calculation
@@ -35,7 +55,7 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/CalculateShippingOptionsResponse"
-  /api/calculateFinanceAgreement:
+  /api/finance/calculateFinanceAgreement:
     post:
       tags:
       - Finance Agreement Calculation
@@ -77,7 +97,7 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/FinanceCalculationResponse"
-  /api/calculateCarbonFootprint:
+  /api/carbon/calculateCarbonFootprint:
     post:
       tags:
       - Carbon Footprint Calculation
@@ -100,6 +120,21 @@ paths:
                 $ref: "#/components/schemas/CarbonFootprintResponse"
 components:
   schemas:
+    RenderCardRequest:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+      description: Request to customize the rendering of the social card.
+    RenderCardResponse:
+      type: object
+      properties:
+        socialCard:
+          type: string
+      description: Response from rendering social card contains base64 encoded png
+        image.
     CalculateShippingOptionsRequest:
       type: object
       properties:

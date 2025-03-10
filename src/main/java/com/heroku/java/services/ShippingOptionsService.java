@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Tag(name = "Shipping Calculation", description = "Calculates the shipping options for a product given external data.")
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/shipping/")
 public class ShippingOptionsService {
 
     private static final Logger logger = LoggerFactory.getLogger(ShippingOptionsService.class);

@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Tag(name = "Finance Agreement Calculation", description = "Calculates finance agreements for car purchases based on valuation, credit status, and business margins.")
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/finance/")
 public class FinanceAgreementService {
 
     @Operation(

@@ -25,7 +25,7 @@ import java.util.Map;
 
 @Tag(name = "Carbon Footprint Calculation", description = "Calculates the carbon footprint for a given flight based on real-time Salesforce data, including checked-in passengers.")
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/carbon/")
 public class CarbonFootprintService {
 
     private static final Logger logger = LoggerFactory.getLogger(CarbonFootprintService.class);
