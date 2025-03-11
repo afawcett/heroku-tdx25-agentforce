@@ -37,7 +37,7 @@ public class SocialCardService {
         BufferedImage logo = ImageIO.read(logoStream);
 
         // Desired logo width
-        int logoWidth = 200;
+        int logoWidth = 400;
         double aspectRatio = (double) logo.getHeight() / logo.getWidth();
         int logoHeight = (int) (logoWidth * aspectRatio);
 
